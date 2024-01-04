@@ -2,14 +2,15 @@ import PropTypes from 'prop-types';
 import { useFetchProducts } from "../hooks/useFetchProducts";
 import { SearchItem } from "./SearchItem";
 
-export const SearchResultGrid = ({search}) => {
+export const SearchResultGrid = ({search, onChangeProducts}) => {
 
     const {products, isLoading} = useFetchProducts(search);
+    onChangeProducts(products);
 
     return (
         <>
             
-            <h3>Recomendaciones para: {search}</h3>
+            <h4>Recomendaciones para: {search}</h4>
             {
                 isLoading && ( <h2>Cargando</h2> )
             }
@@ -24,5 +25,6 @@ export const SearchResultGrid = ({search}) => {
 }
 
 SearchResultGrid.propTypes = {
-    search: PropTypes.string.isRequired
+    search: PropTypes.string.isRequired,
+    onChangeProducts: PropTypes.func.isRequired
 }

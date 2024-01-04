@@ -1,17 +1,20 @@
 import {useState} from 'react';
-import { ChangeSearch, SearchResultGrid } from './components';
+import { ChangeSearch, SearchResultGrid, SendEmail } from './components';
 
 export const UserSegmentationApp = () => {
 
     const [search, setSearch] = useState('');
-    const [recomendations, setRecomendations] = useState([]);
+    const [products, setProducts] = useState([]);
 
     const onChangeSearch = (newSearch) => {
         if(search === newSearch) return;
         setSearch(newSearch);
-        //setCategories(cat => [...cat, 'Dragon Ball']);
     };
-    console.log(search);
+
+    const onChangeProducts = (productsUser) => {
+        if(productsUser.length < 1) return;
+        setProducts(productsUser);
+    };
 
   return (
     <>
@@ -21,9 +24,15 @@ export const UserSegmentationApp = () => {
         <ChangeSearch 
             onNewSearch={value => onChangeSearch(value)}/>
 
-        {search !== '' && 
-            <SearchResultGrid key={search} search={search}/>
+        {
+            products.length > 0 &&
+                <SendEmail 
+                    products={products} user={search} />
         }
+        {search !== '' && 
+            <SearchResultGrid key={search} search={search} onChangeProducts={value => onChangeProducts(value)}/>
+        }
+
 
     </>
   )

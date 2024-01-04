@@ -1,3 +1,5 @@
+import { Images } from "../hooks/images";
+
 export const getProductsServer = async(search) => {
     //const url = `https://api.giphy.com/v1/gifs/search?api_key=az0hsMZrbKats9ls4IAj8ibMAw8Nz0iA&q=${category}&limit=20`;
     const url = `https://rdeqqkkf08.execute-api.us-east-1.amazonaws.com/default/courses?userId=${search}`;
@@ -15,7 +17,7 @@ export const getProductsServer = async(search) => {
             courseName: product.course_name,
             hours: product.hours,
             price: product.price,
-            url: `assets/images/${image}.png`
+            url: Images[product.id],
         }
     });
     

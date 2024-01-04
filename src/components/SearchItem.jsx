@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 export const SearchItem = ({courseName, url}) => {
   
   return (
-    <div className='card'>
+    <div className='card' width='400'>
         <img src={url} alt={courseName} width='400'/>
         <p>{courseName}</p>
     </div>
