@@ -1,25 +1,25 @@
 import { useEffect, useState } from "react";
-import { getGifs } from "../helpers/getGifs"
+import { getProductsServer } from "../helpers/getProducts"
 
-export const useFetchGifs = (category) => {
+export const useFetchProducts = (search) => {
   
-    const [images, setImages] = useState([]);
+    const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    const getImages = async() => {
-        const newImages = await getGifs(category);
-        setImages(newImages);
+    const getProducts = async() => {
+        const newProducts = await getProductsServer(search);
+        setProducts(newProducts);
         setIsLoading(false);
     };
 
     //en el useEffect, si yo dejo el listado de dependencias vacias, solo se va a disparar
     //la primera vez que se renderice el componente
     useEffect(() => {
-        getImages();
+        getProducts();
     }, []);
 
     return {
-        images,
+        products,
         isLoading
     }
 
